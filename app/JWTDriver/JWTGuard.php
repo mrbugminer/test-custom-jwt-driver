@@ -43,4 +43,13 @@ final class JWTGuard implements Guard
     {
         return $this->getProvider()->retrieveByCredentials($credentials) !== null;
     }
+
+    public function attempt(array $credentials = []): Authenticatable|null
+    {
+        $user = $this->getProvider()->retrieveByCredentials($credentials);
+
+        $this->user = $user;
+
+        return $user;
+    }
 }
